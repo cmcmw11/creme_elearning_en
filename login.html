@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <title>Login - Vocab App</title>
+  <meta charset="UTF-8">
+  <title>เข้าสู่ระบบ - Vocab App</title>
 </head>
 <body>
-  <h1>Login</h1>
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
-  <button id="loginBtn">Login</button>
+  <h1>เข้าสู่ระบบ</h1>
+  <input type="email" id="email" placeholder="อีเมล" />
+  <input type="password" id="password" placeholder="รหัสผ่าน" />
+  <button id="loginBtn">เข้าสู่ระบบ</button>
+
+  <!-- 🔽 ลิงก์สมัครสมาชิกที่คุณต้องการ -->
+  <p>ยังไม่มีบัญชีใช่ไหม? <a href="register.html">สมัครสมาชิก</a></p>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAumDfnarsn2DoM3s0uGNU2l8sfNpD58a0",
@@ -27,13 +30,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // ตรวจสอบว่าเคย login ไว้ไหม
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "dashboard.html";
-      }
-    });
-
     document.getElementById("loginBtn").addEventListener("click", () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
@@ -43,12 +39,9 @@
           window.location.href = "dashboard.html";
         })
         .catch((error) => {
-          alert("Login failed: " + error.message);
+          alert("เข้าสู่ระบบไม่สำเร็จ: " + error.message);
         });
     });
   </script>
-  <!-- เพิ่มท้ายไฟล์ login.html -->
-<p>ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a></p>
-
 </body>
 </html>
