@@ -1,39 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Vocab App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(to bottom right, #ffedf5, #e3f6fd);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      font-size: 1.6rem;
+      color: #444;
+    }
+
+    .header button {
+      padding: 0.7rem 1.5rem;
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .header button:hover {
+      background-color: #857dff;
+    }
+
+    .feed {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+
+    .feed .post {
+      margin-bottom: 15px;
+    }
+
+    .feed .post h3 {
+      font-size: 1.4rem;
+      color: #333;
+    }
+
+    .feed .post p {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .feed .post button {
+      padding: 0.5rem 1.2rem;
+      background-color: #6c63ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .feed .post button:hover {
+      background-color: #857dff;
+    }
+
+    @media (max-width: 768px) {
+      .header h2 {
+        font-size: 1.4rem;
+      }
+
+      .feed .post h3 {
+        font-size: 1.2rem;
+      }
+
+      .feed .post p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>🎉 Welcome to your Dashboard</h1>
-  <nav>
-    <a href="vocab-today.html">📅 คำศัพท์วันนี้</a> |
-    <a href="vocab-card.html">🃏 ฝึกปัดคำศัพท์</a> |
-    <button id="logoutBtn">🚪 ออกจากระบบ</button>
-  </nav>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  <div class="container">
+    <div class="header">
+      <h2>ฟีดคำศัพท์วันนี้</h2>
+      <button onclick="window.location.href='login.html'">ออกจากระบบ</button>
+    </div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAumDfnarsn2DoM3s0uGNU2l8sfNpD58a0",
-      authDomain: "creme-elearning-en.firebaseapp.com",
-      projectId: "creme-elearning-en",
-      storageBucket: "creme-elearning-en.firebasestorage.app",
-      messagingSenderId: "545141834950",
-      appId: "1:545141834950:web:4a6f0e532b9208d5c3c3c7",
-      measurementId: "G-69NF6JJPNR"
-    };
+    <div class="feed">
+      <div class="post">
+        <h3>คำศัพท์ที่แนะนำวันนี้</h3>
+        <p>วันนี้เรามีคำศัพท์ที่น่าสนใจมาแนะนำ! ลองทบทวนคำนี้ดูสิครับ</p>
+        <button onclick="window.location.href='vocab-card.html'">ดูคำศัพท์</button>
+      </div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+      <div class="post">
+        <h3>คำศัพท์ที่ต้องเรียนในวันนี้</h3>
+        <p>เรียนคำศัพท์เหล่านี้วันนี้เพื่อเตรียมพร้อมสำหรับการทบทวนในวันพรุ่งนี้!</p>
+        <button onclick="window.location.href='vocab-card.html'">เริ่มเรียน</button>
+      </div>
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    });
-  </script>
+      <div class="post">
+        <h3>คำศัพท์ที่คุณยังไม่รู้จัก</h3>
+        <p>ลองทบทวนคำศัพท์ที่ยังไม่คุ้นเคยในคลังคำศัพท์ของเรา</p>
+        <button onclick="window.location.href='vocab-card.html'">เริ่มทบทวน</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
