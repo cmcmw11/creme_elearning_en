@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <script type="module" src="./assets/js/dashboard.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h2>👋 ยินดีต้อนรับ, <span id="userEmail">...</span></h2>
+
+    <div class="actions">
+      <button onclick="location.href='vocab-today.html'">📅 คำศัพท์วันนี้</button>
+      <button onclick="location.href='vocab-all.html'">📘 คำศัพท์ทั้งหมด</button>
+      <button onclick="location.href='exercise.html'">📝 แบบฝึกหัด</button>
+      <button id="logoutBtn">🚪 ออกจากระบบ</button>
+    </div>
+
+    <div class="progress">
+      <p>📈 คำศัพท์ที่เรียนแล้ว: <span id="wordsLearned">0</span> / 2500</p>
+    </div>
+  </div>
+</body>
+</html>
