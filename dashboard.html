@@ -1,152 +1,169 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Vocab App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Creme E-Learning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    /* ใช้ฟอนต์ Sarabun */
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Sarabun', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #F9F7FF, #D3F5FF);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding-top: 20px;
+      font-family: 'Kanit', sans-serif;
+      background-color: #F5F7FA;
+      color: #333;
     }
-
-    /* Container สำหรับทั้งหมด */
-    .container {
-      width: 100%;
-      max-width: 600px; /* ขนาดเหมาะสมกับมือถือ */
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Header ที่ด้านบน */
-    .header {
+    header {
+      background-color: white;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-
-    .header h2 {
-      font-size: 1.6rem;
-      color: #4C6BFF; /* สีฟ้าสดใส */
-    }
-
-    .header button {
-      padding: 0.7rem 1.5rem;
-      background-color: #6C63FF; /* สีม่วง */
-      color: white;
-      border: none;
-      border-radius: 1rem;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .header button:hover {
-      background-color: #5A52F5; /* สีม่วงเข้ม */
-    }
-
-    /* Feed ที่แสดงคำศัพท์หรือข้อมูลต่างๆ */
-    .feed {
-      background-color: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .feed .post {
-      margin-bottom: 15px;
-    }
-
-    .feed .post h3 {
+    .logo {
       font-size: 1.3rem;
-      color: #4C6BFF; /* ฟ้าสดใส */
+      font-weight: bold;
+      color: #FF82B2;
     }
-
-    .feed .post p {
-      font-size: 1rem;
-      color: #555;
-      margin-top: 10px;
+    .icons {
+      font-size: 1.3rem;
     }
-
-    .feed .post button {
-      padding: 0.5rem 1.2rem;
-      background-color: #77C9B1; /* สีเขียวอ่อน */
-      color: white;
-      font-size: 1rem;
-      border: none;
-      border-radius: 1rem;
+    .icons span {
+      margin-left: 12px;
       cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.3s;
+    }
+    .container {
+      padding: 1rem;
+      max-width: 600px;
+      margin: auto;
     }
 
-    .feed .post button:hover {
-      background-color: #64B0A4; /* สีเขียวเข้ม */
+    .calendar-block, .todo-block {
+      background-color: white;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
 
-    /* Media Query สำหรับมือถือ */
-    @media (max-width: 768px) {
-      .header h2 {
-        font-size: 1.4rem;
-      }
-
-      .feed .post h3 {
-        font-size: 1.2rem;
-      }
-
-      .feed .post p {
-        font-size: 0.9rem;
-      }
+    .calendar-block h3, .todo-block h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #6C63FF;
     }
 
-    /* เพิ่มอิโมจิ */
-    .emoji {
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+
+    .calendar div {
+      padding: 0.6rem 0;
+      border-radius: 10px;
+      background-color: #F1F3FF;
+      font-weight: 500;
+    }
+
+    .calendar .today {
+      background-color: #FFD9EC;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .todo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .todo-item {
+      background-color: #D4F1FF;
+      padding: 0.8rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-bottom {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-top: 1px solid #eee;
+      z-index: 10;
+    }
+
+    .nav-bottom button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    .nav-bottom button.active {
+      color: #FF82B2;
+    }
+
+    .menu {
+      position: fixed;
+      left: 1rem;
+      top: 1rem;
       font-size: 1.5rem;
-      margin-right: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
+  <header>
+    <div class="logo">Creme E-Learning</div>
+    <div class="icons">
+      <span>📅</span>
+      <span>📩</span>
+    </div>
+  </header>
+
   <div class="container">
-    <div class="header">
-      <h2>ฟีดคำศัพท์วันนี้</h2>
-      <button onclick="window.location.href='login.html'">ออกจากระบบ</button>
+    <div class="calendar-block">
+      <h3>📆 ปฏิทินวันนี้</h3>
+      <div class="calendar">
+        <div>จ</div><div>อ</div><div>พ</div><div>พฤ</div><div>ศ</div><div>ส</div><div>อา</div>
+        <div>1</div><div>2</div><div>3</div><div>4</div><div class="today">5</div><div>6</div><div>7</div>
+        <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+      </div>
     </div>
 
-    <div class="feed">
-      <div class="post">
-        <h3><span class="emoji">💡</span>คำศัพท์ที่แนะนำวันนี้</h3>
-        <p>วันนี้เรามีคำศัพท์ที่น่าสนใจมาแนะนำ! ลองทบทวนคำนี้ดูสิครับ</p>
-        <button onclick="window.location.href='vocab-card.html'">ดูคำศัพท์</button>
-      </div>
-
-      <div class="post">
-        <h3><span class="emoji">📚</span>คำศัพท์ที่ต้องเรียนในวันนี้</h3>
-        <p>เรียนคำศัพท์เหล่านี้วันนี้เพื่อเตรียมพร้อมสำหรับการทบทวนในวันพรุ่งนี้!</p>
-        <button onclick="window.location.href='vocab-card.html'">เริ่มเรียน</button>
-      </div>
-
-      <div class="post">
-        <h3><span class="emoji">🔍</span>คำศัพท์ที่คุณยังไม่รู้จัก</h3>
-        <p>ลองทบทวนคำศัพท์ที่ยังไม่คุ้นเคยในคลังคำศัพท์ของเรา</p>
-        <button onclick="window.location.href='vocab-card.html'">เริ่มทบทวน</button>
+    <div class="todo-block">
+      <h3>📝 To-do List</h3>
+      <div class="todo-list">
+        <div class="todo-item">✔️ ทบทวนคำศัพท์วันนี้</div>
+        <div class="todo-item">📖 ทำแบบฝึกหัด 10 ข้อ</div>
+        <div class="todo-item">🧠 ทบทวนคำศัพท์ย้อนหลัง</div>
       </div>
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <div class="nav-bottom">
+    <button class="active" onclick="location.href='dashboard.html'">🏠</button>
+    <button onclick="location.href='vocab-today.html'">🔤</button>
+    <button onclick="location.href='exercises.html'">📝</button>
+    <button onclick="location.href='review.html'">🔁</button>
+    <button onclick="alert('เปิดเมนูโปรไฟล์');">☰</button>
+  </div>
+
 </body>
 </html>
