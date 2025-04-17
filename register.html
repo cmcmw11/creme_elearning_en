@@ -1,14 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <title>Register - Vocab App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครสมาชิก - Vocab App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(to bottom right, #ffedf5, #e3f6fd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #444;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.9rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.75rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #6c63ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #857dff;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: #6c63ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>สมัครสมาชิก</h1>
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
-  <button id="registerBtn">Register</button>
+  <div class="container">
+    <h1>สมัครสมาชิก</h1>
+    <input type="email" id="email" placeholder="อีเมล" />
+    <input type="password" id="password" placeholder="รหัสผ่าน" />
+    <input type="password" id="confirmPassword" placeholder="ยืนยันรหัสผ่าน" />
+    <button id="registerBtn">สมัครสมาชิก</button>
+    <p>มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a></p>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -30,14 +103,19 @@
     document.getElementById("registerBtn").addEventListener("click", () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("รหัสผ่านไม่ตรงกัน!");
+        return;
+      }
 
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
-          alert("สมัครสำเร็จ! กำลังพาไป Dashboard");
-          window.location.href = "dashboard.html";
+          window.location.href = "login.html"; // ไปที่หน้า login หลังจากสมัครสำเร็จ
         })
         .catch((error) => {
-          alert("สมัครไม่สำเร็จ: " + error.message);
+          alert("สมัครสมาชิกไม่สำเร็จ: " + error.message);
         });
     });
   </script>
