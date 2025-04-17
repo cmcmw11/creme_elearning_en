@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Vocab App</title>
+</head>
+<body>
+  <h1>Welcome to Vocab App</h1>
+  <p>กำลังโหลด...</p>
+
   <script type="module">
-    import { auth } from "./firebase/firebase.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAumDfnarsn2DoM3s0uGNU2l8sfNpD58a0",
+      authDomain: "creme-elearning-en.firebaseapp.com",
+      projectId: "creme-elearning-en",
+      storageBucket: "creme-elearning-en.firebasestorage.app",
+      messagingSenderId: "545141834950",
+      appId: "1:545141834950:web:4a6f0e532b9208d5c3c3c7",
+      measurementId: "G-69NF6JJPNR"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -15,8 +33,5 @@
       }
     });
   </script>
-</head>
-<body>
-  <h1>Loading...</h1>
 </body>
 </html>
