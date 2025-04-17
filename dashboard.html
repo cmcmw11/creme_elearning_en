@@ -128,7 +128,7 @@
       <span class="menu-toggle" onclick="toggleMenu()">☰</span>
     </header>
     <div class="top-menu" id="topMenu">
-      <a href="#">👤 โปรไฟล์</a>
+      <a href="#" onclick="showProfile()">👤 โปรไฟล์</a>
       <a href="#" onclick="logout()">🚪 ออกจากระบบ</a>
     </div>
 
@@ -353,10 +353,14 @@
   }
 
   function logout() {
-    firebase.auth().signOut().then(() => {
-      window.location.href = "login.html";
-    });
-  }
+  firebase.auth().signOut().then(() => {
+    // เมื่อออกจากระบบเสร็จแล้วก็ให้เปลี่ยนหน้าไปที่ login.html
+    window.location.href = "login.html";
+  }).catch((error) => {
+    console.error("Logout error:", error);
+  });
+}
+
 </script>
 
 </body>
