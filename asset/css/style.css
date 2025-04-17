@@ -23,6 +23,43 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
+.date-picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.date-picker button {
+  background-color: #D1D3D8; /* สีเทา */
+  color: white;
+  border: none;
+  border-radius: 50%; /* ทำให้ปุ่มเป็นวงกลม */
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 10px;
+}
+
+.date-picker button:hover {
+  background-color: #A9C8FF; /* สีฟ้าเมื่อ hover */
+}
+
+.date-picker button:active {
+  background-color: #6D9EFB; /* สีฟ้าเข้มเมื่อกด */
+  transform: scale(0.95); /* ทำให้ปุ่มเล็กลงเล็กน้อย */
+}
+
+#selectedDate {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+
 /* Header ที่ด้านบน */
 .header {
   display: flex;
