@@ -3,167 +3,361 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - Creme E-Learning</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Creme E-Learning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
-      font-family: 'Kanit', sans-serif;
-      background-color: #F5F7FA;
-      color: #333;
+      padding: 0;
+      font-family: 'Sarabun', sans-serif;
+      background-color: #dff3fc;
+      display: flex;
+      justify-content: center;
+    }
+    .iphone-frame {
+      width: 375px;
+      min-height: 100vh;
+      background-color: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
     }
     header {
-      background-color: white;
-      padding: 1rem;
+      background-color: #f8e1f4;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .logo {
-      font-size: 1.3rem;
       font-weight: bold;
-      color: #FF82B2;
+      font-size: 18px;
     }
-    .icons {
-      font-size: 1.3rem;
-    }
-    .icons span {
-      margin-left: 12px;
+    .menu-toggle {
       cursor: pointer;
+      font-size: 20px;
     }
-    .container {
-      padding: 1rem;
-      max-width: 600px;
-      margin: auto;
+    .top-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #ffeefc;
+      padding: 10px;
     }
-
-    .calendar-block, .todo-block {
-      background-color: white;
-      border-radius: 16px;
-      padding: 1rem;
-      margin-bottom: 1.2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    .top-menu a {
+      padding: 5px 0;
+      color: #333;
+      text-decoration: none;
     }
-
-    .calendar-block h3, .todo-block h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #6C63FF;
+    .calendar-block {
+      padding: 20px;
+      background-color: #f0faff;
     }
-
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
     .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
+      gap: 5px;
+    }
+    .day {
       text-align: center;
-    }
-
-    .calendar div {
-      padding: 0.6rem 0;
+      padding: 10px 0;
+      background-color: #e2f0ff;
       border-radius: 10px;
-      background-color: #F1F3FF;
-      font-weight: 500;
+      font-size: 12px;
+      cursor: pointer;
     }
-
-    .calendar .today {
-      background-color: #FFD9EC;
-      color: #333;
+    .day.today {
+      background-color: #d0ffe0;
       font-weight: bold;
     }
-
-    .todo-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .day.done {
+      background-color: #b0f5c0;
     }
-
+    .todo-block {
+      padding: 15px;
+    }
+    .todo-block h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #444;
+    }
     .todo-item {
-      background-color: #D4F1FF;
-      padding: 0.8rem;
-      border-radius: 12px;
-      font-size: 1rem;
+      background-color: #e2f0ff;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      font-size: 14px;
     }
-
-    .nav-bottom {
+    .todo-item input {
+      margin-right: 10px;
+    }
+    nav {
       position: fixed;
       bottom: 0;
-      width: 100%;
-      background-color: white;
+      width: 375px;
+      background-color: #f8e1f4;
       display: flex;
       justify-content: space-around;
-      align-items: center;
-      padding: 0.5rem 0;
-      border-top: 1px solid #eee;
-      z-index: 10;
+      padding: 10px 0;
+      border-top: 1px solid #ccc;
     }
-
-    .nav-bottom button {
+    nav button {
       background: none;
       border: none;
-      font-size: 1.2rem;
+      font-size: 14px;
       color: #666;
-    }
-
-    .nav-bottom button.active {
-      color: #FF82B2;
-    }
-
-    .menu {
-      position: fixed;
-      left: 1rem;
-      top: 1rem;
-      font-size: 1.5rem;
       cursor: pointer;
+    }
+    nav button.active {
+      color: #008cff;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <div class="logo">Creme E-Learning</div>
-    <div class="icons">
-      <span>📅</span>
-      <span>📩</span>
+  <div class="iphone-frame">
+    <header>
+      <span>Creme E-Learning</span>
+      <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+    </header>
+    <div class="top-menu" id="topMenu">
+      <a href="#">👤 โปรไฟล์</a>
+      <a href="#" onclick="logout()">🚪 ออกจากระบบ</a>
     </div>
-  </header>
 
-  <div class="container">
     <div class="calendar-block">
-      <h3>📆 ปฏิทินวันนี้</h3>
-      <div class="calendar">
-        <div>จ</div><div>อ</div><div>พ</div><div>พฤ</div><div>ศ</div><div>ส</div><div>อา</div>
-        <div>1</div><div>2</div><div>3</div><div>4</div><div class="today">5</div><div>6</div><div>7</div>
-        <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+      <div class="calendar-header">
+        <span id="monthYear">เมษายน 2025</span>
+        <button onclick="generateCalendar()">🔄</button>
       </div>
+      <div class="calendar" id="calendarDays"></div>
     </div>
 
     <div class="todo-block">
-      <h3>📝 To-do List</h3>
-      <div class="todo-list">
-        <div class="todo-item">✔️ ทบทวนคำศัพท์วันนี้</div>
-        <div class="todo-item">📖 ทำแบบฝึกหัด 10 ข้อ</div>
-        <div class="todo-item">🧠 ทบทวนคำศัพท์ย้อนหลัง</div>
-      </div>
+      <h3>To-do List</h3>
+      <div class="todo-item"><input type="checkbox" onchange="checkTodoCompletion()"> อ่านคำศัพท์วันนี้</div>
+      <div class="todo-item"><input type="checkbox" onchange="checkTodoCompletion()"> ทำแบบฝึกหัด</div>
+      <div class="todo-item"><input type="checkbox" onchange="checkTodoCompletion()"> ทบทวนคำศัพท์เดิม</div>
     </div>
+<!-- ตัวเลือกเปลี่ยนวัน -->
+<div class="date-picker">
+  <button class="date-btn" onclick="changeDate(-1)">←</button>
+  <span id="selectedDate"></span>
+  <button class="date-btn" onclick="changeDate(1)">→</button>
+</div>
+
+
+    <nav>
+      <button class="active">🏠 Home</button>
+      <button onclick="location.href='vocab-today.html'">📖 คำศัพท์</button>
+      <button onclick="location.href='exercise.html'">✏️ แบบฝึกหัด</button>
+      <button onclick="location.href='review.html'">🔁 ทบทวน</button>
+    </nav>
   </div>
 
-  <div class="nav-bottom">
-    <button class="active" onclick="location.href='dashboard.html'">🏠</button>
-    <button onclick="location.href='vocab-today.html'">🔤</button>
-    <button onclick="location.href='exercises.html'">📝</button>
-    <button onclick="location.href='review.html'">🔁</button>
-    <button onclick="alert('เปิดเมนูโปรไฟล์');">☰</button>
-  </div>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('topMenu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    }
+
+    function generateCalendar() {
+      const calendar = document.getElementById('calendarDays');
+      calendar.innerHTML = '';
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        calendar.innerHTML += '<div></div>';
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'day';
+        dayDiv.textContent = d;
+        if (d === today.getDate()) {
+          dayDiv.classList.add('today');
+        }
+        dayDiv.id = 'day-' + d;
+        calendar.appendChild(dayDiv);
+      }
+    }
+
+    function checkTodoCompletion() {
+      const checkboxes = document.querySelectorAll('.todo-item input');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      if (allChecked) {
+        const today = new Date().getDate();
+        const dayEl = document.getElementById('day-' + today);
+        if (dayEl) {
+          dayEl.classList.add('done');
+        }
+      }
+    }
+
+    window.onload = generateCalendar;
+  </script>
+
+  <!-- Firebase (ใส่ไว้หากยังไม่ได้โหลดที่ layout หลัก) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAumDfnarsn2DoM3s0uGNU2l8sfNpD58a0",
+      authDomain: "creme-elearning-en.firebaseapp.com",
+      projectId: "creme-elearning-en",
+      storageBucket: "creme-elearning-en.appspot.com",
+      messagingSenderId: "545141834950",
+      appId: "1:545141834950:web:4a6f0e532b9208d5c3c3c7",
+      measurementId: "G-69NF6JJPNR"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+<script>
+  let selectedDate = new Date();  // ตั้งวันที่เริ่มต้นเป็นวันนี้
+
+  const tasks = [
+    "อ่านคำศัพท์วันนี้",
+    "ทำแบบฝึกหัด",
+    "ทบทวนคำศัพท์เดิม"
+  ];
+
+  const db = firebase.firestore();
+  let uid = null;
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      uid = user.uid;
+      generateCalendar();
+      loadTodos();
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+
+  // เปลี่ยนวันที่เมื่อคลิกปุ่ม ← หรือ →
+  function changeDate(direction) {
+    selectedDate.setDate(selectedDate.getDate() + direction);  // เปลี่ยนวันที่
+    loadTodos();  // โหลด To-do list สำหรับวันใหม่
+    generateCalendar();  // สร้างปฏิทินใหม่หลังจากเปลี่ยนวัน
+  }
+
+  // โหลด To-do สำหรับวันที่เลือก
+  async function loadTodos() {
+    const container = document.querySelector(".todo-block");
+    const dateKey = formatDate(selectedDate); // เปลี่ยนเป็นคีย์ของวันที่ที่เลือก
+    document.getElementById('selectedDate').textContent = formatDate(selectedDate);
+
+    container.innerHTML = '<h3>To-do List</h3>';
+
+    let todayData = {};
+    try {
+      const doc = await db.collection("todos").doc(uid).get();
+      todayData = doc.exists && doc.data()[dateKey] ? doc.data()[dateKey] : {};
+    } catch (err) {
+      console.error("Error loading Firestore", err);
+    }
+
+    tasks.forEach(task => {
+      const checked = todayData[task] ? "checked" : "";
+      container.innerHTML += `
+        <div class="todo-item">
+          <input type="checkbox" data-task="${task}" onchange="saveTodo()" ${checked}>
+          ${task}
+        </div>
+      `;
+    });
+  }
+
+  // บันทึก To-do
+  async function saveTodo() {
+    const checkboxes = document.querySelectorAll('.todo-item input');
+    const dateKey = formatDate(selectedDate);
+    let todayData = {};
+    checkboxes.forEach(cb => {
+      const task = cb.getAttribute("data-task");
+      todayData[task] = cb.checked;
+    });
+
+    try {
+      await db.collection("todos").doc(uid).set({
+        [dateKey]: todayData
+      }, { merge: true });
+    } catch (err) {
+      console.error("Error saving to Firestore", err);
+    }
+  }
+
+  // แปลงวันที่ให้เป็นรูปแบบ YYYY-MM-DD
+  function formatDate(date) {
+    return date.toISOString().split('T')[0];  // คืนค่าวันที่ในรูปแบบ YYYY-MM-DD
+  }
+
+  // สร้างปฏิทิน
+  async function generateCalendar() {
+    const calendar = document.getElementById('calendarDays');
+    calendar.innerHTML = '';
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let userData = {};
+    try {
+      const doc = await db.collection("todos").doc(uid).get();
+      if (doc.exists) userData = doc.data();
+    } catch (err) {
+      console.error("Error getting Firestore", err);
+    }
+
+    for (let i = 0; i < firstDay; i++) {
+      calendar.innerHTML += '<div></div>';
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const done = userData[dateKey] && Object.values(userData[dateKey]).every(val => val);
+
+      const dayDiv = document.createElement('div');
+      dayDiv.className = 'day';
+      dayDiv.textContent = d;
+      if (d === selectedDate.getDate()) {
+        dayDiv.classList.add('today');
+      }
+      if (done) {
+        dayDiv.classList.add('done');
+      }
+      dayDiv.id = 'day-' + d;
+      dayDiv.onclick = function() {
+        selectedDate.setDate(d);
+        loadTodos();
+      };
+      calendar.appendChild(dayDiv);
+    }
+  }
+
+  function logout() {
+    firebase.auth().signOut().then(() => {
+      window.location.href = "login.html";
+    });
+  }
+</script>
 
 </body>
 </html>
