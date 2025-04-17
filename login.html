@@ -1,38 +1,51 @@
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Vocab App</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button id="loginBtn">Login</button>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAumDfnarsn2DoM3s0uGNU2l8sfNpD58a0",
-  authDomain: "creme-elearning-en.firebaseapp.com",
-  projectId: "creme-elearning-en",
-  storageBucket: "creme-elearning-en.firebasestorage.app",
-  messagingSenderId: "545141834950",
-  appId: "1:545141834950:web:4a6f0e532b9208d5c3c3c7",
-  measurementId: "G-69NF6JJPNR"
-};
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+    const firebaseConfig = {
+      apiKey: "AIzaSyAumDfnarsn2DoM3s0uGNU2l8sfNpD58a0",
+      authDomain: "creme-elearning-en.firebaseapp.com",
+      projectId: "creme-elearning-en",
+      storageBucket: "creme-elearning-en.firebasestorage.app",
+      messagingSenderId: "545141834950",
+      appId: "1:545141834950:web:4a6f0e532b9208d5c3c3c7",
+      measurementId: "G-69NF6JJPNR"
+    };
 
-  // ตรวจสอบว่าเข้าสู่ระบบอยู่แล้วไหม
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ไปหน้า dashboard เลย
-      window.location.href = "dashboard.html";
-    }
-  });
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-  // ล็อกอินเมื่อกดปุ่ม
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+    // ตรวจสอบว่าเคย login ไว้ไหม
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
         window.location.href = "dashboard.html";
-      })
-      .catch((error) => {
-        alert("เข้าสู่ระบบไม่สำเร็จ: " + error.message);
-      });
-  });
-</script>
+      }
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          alert("Login failed: " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>
