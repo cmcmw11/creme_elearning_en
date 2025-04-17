@@ -1,10 +1,11 @@
 /* /assets/css/style.css */
 
-/* พื้นหลังและรูปแบบของ body */
+/* ใช้ฟอนต์ Sarabun */
 body {
+  font-family: 'Sarabun', sans-serif;
   margin: 0;
-  font-family: 'Prompt', sans-serif;
-  background: linear-gradient(to bottom right, #ffedf5, #e3f6fd);
+  padding: 0;
+  background: linear-gradient(to bottom right, #F9F7FF, #D3F5FF);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -12,34 +13,32 @@ body {
   padding-top: 20px;
 }
 
-/* รูปแบบ container */
+/* Container สำหรับทั้งหมด */
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 600px; /* ขนาดเหมาะสมกับมือถือ */
   background-color: #fff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
 }
 
-/* ส่วน header */
+/* Header ที่ด้านบน */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 15px;
   margin-bottom: 20px;
 }
 
 .header h2 {
   font-size: 1.6rem;
-  color: #444;
+  color: #4C6BFF; /* สีฟ้าสดใส */
 }
 
 .header button {
   padding: 0.7rem 1.5rem;
-  background-color: #6c63ff;
+  background-color: #6C63FF; /* สีม่วง */
   color: white;
   border: none;
   border-radius: 1rem;
@@ -48,16 +47,15 @@ body {
 }
 
 .header button:hover {
-  background-color: #857dff;
+  background-color: #5A52F5; /* สีม่วงเข้ม */
 }
 
-/* รูปแบบ feed */
+/* Feed ที่แสดงคำศัพท์หรือข้อมูลต่างๆ */
 .feed {
   background-color: #fff;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
 }
 
 .feed .post {
@@ -65,8 +63,8 @@ body {
 }
 
 .feed .post h3 {
-  font-size: 1.4rem;
-  color: #333;
+  font-size: 1.3rem;
+  color: #4C6BFF; /* ฟ้าสดใส */
 }
 
 .feed .post p {
@@ -77,7 +75,7 @@ body {
 
 .feed .post button {
   padding: 0.5rem 1.2rem;
-  background-color: #6c63ff;
+  background-color: #77C9B1; /* สีเขียวอ่อน */
   color: white;
   font-size: 1rem;
   border: none;
@@ -88,7 +86,7 @@ body {
 }
 
 .feed .post button:hover {
-  background-color: #857dff;
+  background-color: #64B0A4; /* สีเขียวเข้ม */
 }
 
 /* Media Query สำหรับมือถือ */
@@ -104,4 +102,10 @@ body {
   .feed .post p {
     font-size: 0.9rem;
   }
+}
+
+/* เพิ่มอิโมจิ */
+.emoji {
+  font-size: 1.5rem;
+  margin-right: 10px;
 }
